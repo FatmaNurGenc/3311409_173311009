@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter/services.dart';
 import 'package:moddas_mobil_app_deneme/pages/home_page.dart';
 
 class LoginApp extends StatefulWidget {

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:moddas_mobil_app_deneme/pages/cari/cari_menu.dart';
+import 'package:moddas_mobil_app_deneme/pages/dashboard/dashboard.dart';
+import 'package:moddas_mobil_app_deneme/pages/fatura_fis/fatura_fis.dart';
 import 'package:moddas_mobil_app_deneme/pages/organizer/organizer_kayit_bilgileri.dart';
+import 'package:moddas_mobil_app_deneme/pages/siparis_yonetimi/siparis_yonetim.dart';
+import 'package:moddas_mobil_app_deneme/pages/stok/stok.dart';
 
 class AnaSayfa extends StatelessWidget {
   final kullaniciAdi, sifre;
@@ -74,6 +79,12 @@ class AnaSayfa extends StatelessWidget {
                               ),
                             ],
                           )),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Dashboard()));
+                      },
                     ),
                   ),
                   SizedBox(
@@ -109,10 +120,12 @@ class AnaSayfa extends StatelessWidget {
                               ),
                             ],
                           )),
-                      // onTap: () {
-                      //   Navigator.push(
-                      //       context, MaterialPageRoute(builder: (context) => Cari()));
-                      // },
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CariMenu()));
+                      },
                     ),
                   ),
                   SizedBox(
@@ -146,6 +159,12 @@ class AnaSayfa extends StatelessWidget {
                               ),
                             ],
                           )),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => FaturaFis()));
+                      },
                     ),
                   ),
                   SizedBox(
@@ -179,6 +198,12 @@ class AnaSayfa extends StatelessWidget {
                               ),
                             ],
                           )),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SiparisYonetimMenu()));
+                      },
                     ),
                   ),
                   SizedBox(
@@ -212,6 +237,12 @@ class AnaSayfa extends StatelessWidget {
                               ),
                             ],
                           )),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StokMenu()));
+                      },
                     ),
                   ),
                   SizedBox(

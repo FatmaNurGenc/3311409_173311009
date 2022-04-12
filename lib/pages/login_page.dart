@@ -45,16 +45,14 @@ class _LoginAppState extends State<LoginApp> {
                   SizedBox(
                     height: 150,
                     width: 300,
-                    child: InkWell(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("assets/moddas.png"),
-                          ),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/moddas.png"),
                         ),
-                        margin: const EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
                       ),
+                      margin: const EdgeInsets.all(5.0),
+                      alignment: Alignment.center,
                     ),
                   ),
                   const SizedBox(

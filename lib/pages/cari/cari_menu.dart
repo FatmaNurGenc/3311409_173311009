@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-class CariMenu extends StatelessWidget {
+class CariMenu extends StatefulWidget {
   const CariMenu({Key? key}) : super(key: key);
+
+  @override
+  State<CariMenu> createState() => _CariMenuState();
+}
+
+class _CariMenuState extends State<CariMenu> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Cari Menü")),
-      body: Column(
-        children: [TextButton(onPressed: deneme(), child: Text("tıkla"))],
-      ),
-    );
+        appBar: AppBar(title: Text("Cari Menü")),
+        body: Center(child: Text("Cari")));
   }
 }
-
-deneme() {}

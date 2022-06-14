@@ -11,7 +11,7 @@ class KayitBilgileri extends StatefulWidget {
 }
 
 class _KayitBilgileriState extends State<KayitBilgileri> {
-  TextEditingController _islemAciklamasi = new TextEditingController();
+  //TextEditingController _islemAciklamasi = new TextEditingController();
   TextEditingController dateinput = TextEditingController();
   TextEditingController timeinput = TextEditingController();
   int currentIndex = 0;
@@ -115,7 +115,7 @@ class _KayitBilgileriState extends State<KayitBilgileri> {
     '04 - Acil',
     '05 - Hata'
   ];
-  String? valuegrup, valuekonum, valuealtgrup, valueoncelik;
+  String? valueGrup, valuekonum, valuealtgrup, valueoncelik;
 
   @override
   Widget build(BuildContext context) {
@@ -129,8 +129,9 @@ class _KayitBilgileriState extends State<KayitBilgileri> {
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
               colors: [
-                Color.fromARGB(255, 74, 187, 240),
-                Color.fromARGB(255, 4, 65, 95)
+                Color.fromARGB(255, 64, 109, 188),
+                Colors.blue,
+                Color.fromARGB(255, 90, 217, 240),
               ],
               begin: Alignment.bottomRight,
               end: Alignment.topLeft,
@@ -138,29 +139,29 @@ class _KayitBilgileriState extends State<KayitBilgileri> {
           ),
           bottom: const TabBar(tabs: [
             Tab(
-              icon: Icon(Icons.create),
+              //icon: Icon(Icons.create,size: 20,),
               text: 'Kayıt Bilgileri',
             ),
             Tab(
-              icon: Icon(Icons.list),
+              // icon: Icon(Icons.list),
               text: 'Liste',
             )
           ]),
         ),
-        bottomNavigationBar: BottomNavigationBar1(),
+        //bottomNavigationBar: BottomNavigationBar1(),
         body: TabBarView(children: [
           KayitBilgileri(),
-          OrganizerList(
-            islemAciklamasi: _islemAciklamasi,
-          ),
+          const OrganizerListe(),
         ]),
       ),
     );
   }
 
+  final TextEditingController _islemAciklamasi = TextEditingController();
   @override
   KayitBilgileri() {
     return Scaffold(
+        //bottomNavigationBar: BottomNavigationBar1(),
         body: Container(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -168,139 +169,189 @@ class _KayitBilgileriState extends State<KayitBilgileri> {
         color: Colors.white,
       ),
       child: SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
             Widget>[
           const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: InputDecorator(
-                decoration: InputDecoration(
-                  contentPadding:
-                      const EdgeInsets.only(left: 16.0, right: 16.0),
-                  floatingLabelStyle: const TextStyle(
-                      color: Color.fromARGB(255, 19, 84, 138),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                  labelText: 'Tarih',
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
-                ),
-                child: TextField(
-                  controller: dateinput,
-                  decoration: const InputDecoration(
-                      icon: Icon(Icons.calendar_today),
-                      floatingLabelAlignment: FloatingLabelAlignment.center),
-                  readOnly:
-                      true, //set it true, so that user will not able to edit text
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2050));
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 16, 0, 16),
+                width: 200,
+                child: InputDecorator(
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(
+                          left: 16.0, right: 16.0, bottom: 0),
+                      floatingLabelStyle: const TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                      labelText: 'Tarih',
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                              color: Colors.blueAccent, width: 2.0)),
+                    ),
+                    child: TextField(
+                      controller: dateinput,
+                      decoration: const InputDecoration(
+                          icon: Icon(Icons.calendar_today),
+                          floatingLabelAlignment:
+                              FloatingLabelAlignment.center),
+                      readOnly:
+                          true, //true olarak ayarlayınca kullanıcı metni düzenleyemez
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2050));
 
-                    if (pickedDate != null) {
-                      String formattedDate =
-                          DateFormat('dd.MM.yyyy').format(pickedDate);
-                      setState(() {
-                        dateinput.text = formattedDate;
-                      });
-                    }
-                  },
-                )),
+                        if (pickedDate != null) {
+                          //DateTime now = DateTime.now();
+                          String formattedDate =
+                              //DateFormat('dd.MM.yyyy kk:mm').format(now);
+                              DateFormat('dd.MM.yyyy').format(pickedDate);
+                          setState(() {
+                            dateinput.text = formattedDate;
+                          });
+                        }
+                      },
+                    )),
+              ),
+              Container(
+                width: 200,
+                //height: 80,
+                padding: const EdgeInsets.fromLTRB(4, 16, 10, 16),
+                child: InputDecorator(
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.only(
+                        left: 16.0, right: 16.0, bottom: -8),
+                    floatingLabelStyle: const TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                    labelText: 'Saat',
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color: Colors.blueAccent, width: 2.0)),
+                  ),
+                  child: ListTile(
+                    title: Text("${time.hour}:${time.minute}"),
+                    trailing: const Icon(Icons.watch_later),
+                    onTap: _pickTime,
+                  ),
+                ),
+              ),
+            ],
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(10, 16, 10, 16),
             child: InputDecorator(
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 16.0, right: 16.0),
                 floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                labelText: 'Saat',
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
-              ),
-              child: ListTile(
-                title: Text("${time.hour}:${time.minute}"),
-                trailing: const Icon(Icons.watch_later),
-                onTap: _pickTime,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: InputDecorator(
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
+                    color: Colors.blueAccent,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
                 labelText: 'Sorumlu',
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
+                    borderSide:
+                        const BorderSide(color: Colors.blueAccent, width: 2.0)),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: InputDecorator(
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                labelText: 'Grubu',
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  value: valuegrup,
-                  icon: const Icon(Icons.arrow_drop_down,
-                      color: Color.fromARGB(255, 19, 84, 138)),
-                  iconSize: 30,
-                  isExpanded: true,
-                  items: grup.map(buildMenuItem).toList(),
-                  onChanged: (valuegrup) =>
-                      setState(() => this.valuegrup = valuegrup),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 200,
+                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: InputDecorator(
+                  decoration: InputDecoration(
+                    contentPadding:
+                        const EdgeInsets.only(left: 16.0, right: 16.0),
+                    floatingLabelStyle: const TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                    labelText: 'Grubu',
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color: Colors.blueAccent, width: 2.0)),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: valueGrup,
+                      icon: const Icon(Icons.arrow_drop_down,
+                          color: Colors.blueAccent),
+                      iconSize: 30,
+                      isExpanded: true,
+                      items: grup.map(buildMenuItem).toList(),
+                      onChanged: (valuegrup) =>
+                          setState(() => this.valueGrup = valuegrup),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              Container(
+                width: 200,
+                padding: const EdgeInsets.fromLTRB(4, 16, 10, 16),
+                child: InputDecorator(
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(left: 16.0, right: 16.0),
+                    floatingLabelStyle: const TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                    labelText: 'Alt Grup',
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                            color: Colors.blueAccent, width: 2.0)),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      value: valuealtgrup,
+                      icon: const Icon(Icons.arrow_drop_down,
+                          color: Colors.blueAccent),
+                      iconSize: 30,
+                      isExpanded: true,
+                      items: altgrup.map(buildMenuItem).toList(),
+                      onChanged: (valuealtgrup) =>
+                          setState(() => this.valuealtgrup = valuealtgrup),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(10, 16, 10, 16),
             child: InputDecorator(
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 16.0, right: 16.0),
                 floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
+                    color: Colors.blueAccent,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
                 labelText: 'Konum',
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
+                    borderSide:
+                        const BorderSide(color: Colors.blueAccent, width: 2.0)),
               ),
               child: DropdownButtonHideUnderline(
+                //dropdownbutton'ın altındaki çizgiyi kaldırmak için kullanıldı
                 child: DropdownButton<String>(
                   value: valuekonum,
                   icon: const Icon(Icons.arrow_drop_down,
-                      color: Color.fromARGB(255, 19, 84, 138)),
+                      color: Colors.blueAccent),
                   iconSize: 30,
                   isExpanded: true,
                   items: konum.map(buildMenuItem).toList(),
@@ -311,54 +362,25 @@ class _KayitBilgileriState extends State<KayitBilgileri> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: InputDecorator(
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(left: 16.0, right: 16.0),
-                floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                labelText: 'Alt Grup',
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
-              ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  value: valuealtgrup,
-                  icon: const Icon(Icons.arrow_drop_down,
-                      color: Color.fromARGB(255, 19, 84, 138)),
-                  iconSize: 30,
-                  isExpanded: true,
-                  items: altgrup.map(buildMenuItem).toList(),
-                  onChanged: (valuealtgrup) =>
-                      setState(() => this.valuealtgrup = valuealtgrup),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(10, 16, 10, 16),
             child: InputDecorator(
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 16.0, right: 16.0),
                 floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
+                    color: Colors.blueAccent,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
                 labelText: 'Öncelik',
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
+                    borderSide:
+                        const BorderSide(color: Colors.blueAccent, width: 2.0)),
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   value: valueoncelik,
                   icon: const Icon(Icons.arrow_drop_down,
-                      color: Color.fromARGB(255, 19, 84, 138)),
+                      color: Colors.blueAccent),
                   iconSize: 30,
                   isExpanded: true,
                   items: oncelik.map(buildMenuItem).toList(),
@@ -369,19 +391,19 @@ class _KayitBilgileriState extends State<KayitBilgileri> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(10, 16, 10, 16),
             child: InputDecorator(
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 16.0, right: 16.0),
                 floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
+                    color: Colors.blueAccent,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
                 labelText: 'Yetkili',
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
+                    borderSide:
+                        const BorderSide(color: Colors.blueAccent, width: 2.0)),
               ),
               child: const TextField(
                 decoration: InputDecoration(border: InputBorder.none),
@@ -390,43 +412,48 @@ class _KayitBilgileriState extends State<KayitBilgileri> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: InputDecorator(
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-                labelText: 'Telefon',
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
-              ),
-              child: TextField(
-                inputFormatters: [maskFormatter],
-                decoration: InputDecoration(border: InputBorder.none),
-                //maxLines: null,
-                keyboardType: TextInputType.number,
+          Container(
+            width: 250,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 16, 10, 16),
+              child: InputDecorator(
+                decoration: InputDecoration(
+                  suffixIcon: Icon(Icons.phone),
+                  contentPadding:
+                      const EdgeInsets.only(left: 16.0, right: 16.0),
+                  floatingLabelStyle: const TextStyle(
+                      color: Colors.blueAccent,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                  labelText: 'Telefon',
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                          color: Colors.blueAccent, width: 2.0)),
+                ),
+                child: TextField(
+                  inputFormatters: [maskFormatter],
+                  decoration: InputDecoration(border: InputBorder.none),
+                  //maxLines: null,
+                  keyboardType: TextInputType.number,
+                ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(10, 16, 10, 16),
             child: InputDecorator(
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.only(left: 16.0, right: 16.0),
                 floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
+                    color: Colors.blueAccent,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
                 labelText: 'Firma Adı',
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
+                    borderSide:
+                        const BorderSide(color: Colors.blueAccent, width: 2.0)),
               ),
               child: const TextField(
                 decoration: InputDecoration(border: InputBorder.none),
@@ -436,27 +463,65 @@ class _KayitBilgileriState extends State<KayitBilgileri> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(10, 16, 10, 16),
             child: InputDecorator(
               decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                contentPadding:
+                    const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 30),
                 floatingLabelStyle: const TextStyle(
-                    color: Color.fromARGB(255, 19, 84, 138),
+                    color: Colors.blueAccent,
                     fontWeight: FontWeight.bold,
                     fontSize: 20),
                 labelText: 'İşlem Açıklaması',
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 19, 84, 138), width: 2.0)),
+                    borderSide:
+                        const BorderSide(color: Colors.blueAccent, width: 2.0)),
               ),
               child: TextField(
+                autofocus: true,
                 controller: _islemAciklamasi,
-                decoration: InputDecoration(border: InputBorder.none),
+                decoration: const InputDecoration(border: InputBorder.none),
                 maxLines: null,
                 keyboardType: TextInputType.multiline,
               ),
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: KayitBilgileri,
+                child: Text("Kaydet"),
+                style: ElevatedButton.styleFrom(primary: Colors.green),
+              ),
+              ElevatedButton(
+                onPressed: KayitBilgileri,
+                child: Text("Yeni Ekle"),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: KayitBilgileri,
+                child: Text("Vazgeç"),
+                style: ElevatedButton.styleFrom(primary: Colors.orange),
+              ),
+              ElevatedButton(
+                onPressed: KayitBilgileri,
+                child: Text("Sil"),
+                style: ElevatedButton.styleFrom(primary: Colors.red[400]),
+              ),
+              ElevatedButton(
+                onPressed: KayitBilgileri,
+                child: Text("Kopya Kayıt"),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.purple, //shadowColor: Colors.purpleAccent,
+                ),
+              ),
+            ],
           ),
         ]),
       ),
@@ -479,14 +544,15 @@ class _KayitBilgileriState extends State<KayitBilgileri> {
         value: item,
         child: Text(
           item,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          style: const TextStyle(
+              //fontWeight: FontWeight.bold,
+              fontSize: 15),
         ),
       );
 }
 
+//Alt menü
 class BottomNavigationBar1 extends StatelessWidget {
-  TextEditingController _islemAciklamasi = new TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -522,8 +588,8 @@ class BottomNavigationBar1 extends StatelessWidget {
                   //selected: true,
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => OrganizerList(
-                            islemAciklamasi: _islemAciklamasi.text)));
+                        //builder: (context) => OrganizerList(
+                        builder: (context) => OrganizerListe()));
                   },
                 ),
                 IconBottomBar(
@@ -553,6 +619,7 @@ class BottomNavigationBar1 extends StatelessWidget {
   }
 }
 
+//Alt menü ikonları
 class IconBottomBar extends StatelessWidget {
   final String text;
   final IconData icon;

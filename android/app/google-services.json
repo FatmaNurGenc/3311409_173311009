@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1021340910210",
+    "project_id": "moddas-deneme",
+    "storage_bucket": "moddas-deneme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021340910210:android:5927089839cce282deea9b",
+        "android_client_info": {
+          "package_name": "com.example.moddas_mobil_app_deneme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021340910210-4011jk945qtfhubihkthtr0o8bjhcivc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moddas_mobil_app_deneme",
+            "certificate_hash": "bcde0a587eacc5d5034480a33972f3694648bbd0"
+          }
+        },
+        {
+          "client_id": "1021340910210-8rsavru18h31tlmdm4pb8kf7j6b4lnuh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAj4uMDa6tPi2dPRyDUgSpFnuam0LPeDo8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021340910210-8rsavru18h31tlmdm4pb8kf7j6b4lnuh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
